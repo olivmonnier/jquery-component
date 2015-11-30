@@ -1210,20 +1210,15 @@ var template = require('lodash/string/template');
 (function($) {
   $.fn.events = function(o){
     for (var i in o) {
-      var eventTag = i.split(" ");
+      var separator = i.split(' ');
+      var result = [];
 
-      if (eventTag.length > 1) {
-        var select = this;
-        for(var n = 1; n < eventTag.length; n++) {
-          select = select.find(eventTag[n])
-          if (n === eventTag.length-1) {
-            select.bind(i, o[i]);
-          }
-        }
+      if (separator.length > 1) {
+        result = [separator.shift(), separator.join(' ')];
+        this.find(result[1]).bind(i, o[i]);
       } else {
         this.bind(i, o[i]);
       }
-
     }
     return this;
   };
