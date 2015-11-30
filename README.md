@@ -1,10 +1,13 @@
-# jQuery-component
+# jquery.component
 
 Create a component with jQuery. Inspired by Backbone View model.
 
 [![license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## How to install
+```terminal
+npm install --save jquery.component
+```
 Include in your .html this library after jQuery file.
 
 ## How it work
