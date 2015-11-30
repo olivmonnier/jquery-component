@@ -5,10 +5,10 @@ Create a component with jQuery. Inspired by Backbone View model.
 [![license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## How to install
-include in your .html this library after jQuery file.
+Include in your .html this library after jQuery file.
 
 ## How it work
-jquery-component use template method of lodash you can so integrate a template in your .html. For example :
+jquery-component use template method of lodash so you can integrate a template in your .html. For example :
 ```html
 <script type="text/template" id="title-template">
   <div>
@@ -28,7 +28,7 @@ var titleComponent = $.component({
   }
 });
 ```
-After that you can use your component with some datas by the render method:
+After that you can use your component with some datas using the render method:
 ```javascript
 $('body').append(titleComponent.render({
   data: {
