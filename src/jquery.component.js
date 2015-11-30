@@ -6,7 +6,13 @@ var template = require('lodash/string/template');
       var eventTag = i.split(" ");
 
       if (eventTag.length > 1) {
-        this.find(eventTag[1]).bind(i, o[i]);
+        var select = this;
+        for(var n = 1; n < eventTag.length; n++) {
+          select = select.find(eventTag[n])
+          if (n === eventTag.length-1) {
+            select.bind(i, o[i]);
+          }
+        }
       } else {
         this.bind(i, o[i]);
       }
