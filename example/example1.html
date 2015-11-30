@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Example 1</title>
+  </head>
+  <body>
+    <script type="text/template" id="title-template">
+      <div>
+        <h1><%= data.msg %></h1>
+        <p class="content"></p>
+      </div>
+    </script>
+
+    <script src="../node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="../dist/jquery.component.js" charset="utf-8"></script>
+    <script>
+      var titleComponent = $.component({
+        template: $('#title-template').html(),
+        events: {
+          'click h1': function() {
+            $(this).parent().find('p').append('Hello everyone !');
+          }
+        }
+      });
+
+      $('body').append(titleComponent.render({
+        data: {
+          msg: 'Hello World'
+        }
+      }));
+    </script>
+  </body>
+</html>

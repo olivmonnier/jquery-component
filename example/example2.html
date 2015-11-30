@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Example 2</title>
+  </head>
+  <body>
+    <button class="add">Add</button>
+    <script type="text/template" id="component-test">
+      <div>
+        <div class="parent">
+          <input type="text" id="input"/>
+        </div>
+        <input type="text" value="<%= data.msg %>"/>
+        <button>Button</button>
+      </div>
+    </script>
+    <script src="../node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="../dist/jquery.component.js" charset="utf-8"></script>
+    <script>
+      var componentTest = $.component({
+        events: {
+          'focus input': function() {
+            console.log('focus');
+          },
+          'change .parent #input': function() {
+            console.log('change');
+          },
+          'click button': function() {
+            console.log('click');
+          }
+        },
+        template: $('#component-test').html()
+      });
+      $('.add').click(function() {
+        $('body').append(componentTest.render({
+          data: {
+            msg: 'Test'
+          }
+        }));
+      });
+    </script>
+  </body>
+</html>

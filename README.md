@@ -23,7 +23,7 @@ var titleComponent = $.component({
   template: $('#title-template').html(),
   events: {
     'click h1': function() {
-      this.append('Hello everyone !');
+      $(this).parent().find('p').append('Hello everyone !');
     }
   }
 });
