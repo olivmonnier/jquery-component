@@ -1,7 +1,7 @@
 {
   "name": "jquery-component",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "Create a component with jQuery. Inspired by Backbone View model.",
   "main": "index.js",
   "scripts": {
     "browserify": "browserify src/jquery.component.js > dist/jquery.component.js",
@@ -9,7 +9,7 @@
     "dist": "npm run browserify && npm run uglify"
   },
   "author": "olivmonnier",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "browserify": "^12.0.1",
     "uglify-js": "^2.6.1"
