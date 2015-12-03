@@ -13580,7 +13580,8 @@ var _ = require('lodash');
   };
 
   $.fn.bindData = function(callback) {
-    $(this).find('[data-bind-id]').each(function() {
+    var _this = this;
+    $(_this).find('[data-bind-id]').each(function() {
       var pubSub = $({});
       var id = $(this).data('bind-id');
       var eventName = id + ':change';
@@ -13591,7 +13592,7 @@ var _ = require('lodash');
       });
 
       pubSub.on(eventName, function(evt, newVal) {
-        $('[data-bind = ' + id + ']').each(function() {
+        $(_this).find('[data-bind = ' + id + ']').each(function() {
           var $bound = $(this);
 
           if(callback) return callback(newVal);
