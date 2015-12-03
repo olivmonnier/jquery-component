@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Binding data example</title>
+  </head>
+  <body>
+    <script type="text/template" id="name-template">
+      <div>
+        <h1>My name is <span data-bind="name"></span></h1>
+        <input type data-bind-id="name"/>
+      </div>
+    </script>
+    <script src="../node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="../dist/jquery.component.js" charset="utf-8"></script>
+    <script>
+      var componentName = $.component({
+        template: $('#name-template').html()
+      });
+      $('body').append(componentName.render());
+    </script>
+  </body>
+</html>

@@ -1,4 +1,5 @@
 var template = require('lodash/string/template');
+var _ = require('lodash');
 
 (function($) {
   $.fn.events = function(o){
@@ -16,13 +17,48 @@ var template = require('lodash/string/template');
     return this;
   };
 
-  $.component = function(options){
+  $.fn.bindData = function(callback) {
+    $(this).find('[data-bind-id]').each(function() {
+      var pubSub = $({});
+      var id = $(this).data('bind-id');
+      var eventName = id + ':change';
+
+      $(this).on('change input', function(e) {
+        var $input = $(this);
+        pubSub.trigger(eventName, [$input.val()]);
+      });
+
+      pubSub.on(eventName, function(evt, newVal) {
+        $('[data-bind = ' + id + ']').each(function() {
+          var $bound = $(this);
+
+          if(callback) return callback(newVal);
+
+          if ( $bound.is("input, textarea, select") ) {
+            $bound.val( newVal );
+          } else {
+            $bound.html( newVal );
+          }
+        });
+      });
+    });
+    return this;
+  };
+
+  $.component = function(options) {
     return {
       template: options.template || '',
       events: options.events || {},
+      model: options.model || {},
       render: function(data) {
-        return $(template(this.template)(data)).events(this.events);
+        var _this = this;
+        if (data) this.model = data;
+
+        var elem = $(template(this.template)(this.model));
+
+        return elem.events(this.events).bindData();
       }
     }
   };
+
 }(jQuery));
