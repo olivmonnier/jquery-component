@@ -33,7 +33,7 @@ var _ = require('lodash');
         $(_this).find('[data-bind = ' + id + ']').each(function() {
           var $bound = $(this);
 
-          if(callback) return callback(newVal);
+          if (callback) newVal = callback(newVal);
 
           if ( $bound.is("input, textarea, select") ) {
             $bound.val( newVal );
@@ -50,6 +50,7 @@ var _ = require('lodash');
     return {
       template: options.template || '',
       events: options.events || {},
+      bindData: options.bindData || null,
       model: options.model || {},
       render: function(data) {
         var _this = this;
@@ -57,7 +58,7 @@ var _ = require('lodash');
 
         var elem = $(template(this.template)(this.model));
 
-        return elem.events(this.events).bindData();
+        return elem.events(this.events).bindData(this.bindData);
       }
     }
   };

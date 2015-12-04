@@ -39,3 +39,25 @@ $('body').append(titleComponent.render({
   }
 }));
 ```
+You can also bind your datas by declare a `data-bind-id` attribute with a name and then apply a `data-bind` attribute on another element with the name target. Follow this example:
+```html
+<script type="text/template" id="name-template">
+  <div>
+    <h1>My name is <span data-bind="name"></span></h1>
+    <input type data-bind-id="name"/>
+  </div>
+</script>
+
+<script>
+  $('body').append(componentName.render());
+</script>
+```
+It's possible to pass a callback method in $.component:
+```javascript
+var componentName = $.component({
+  template: $('#name-template').html(),
+  bindData: function (val) {
+    return val + val;
+  }
+});
+```

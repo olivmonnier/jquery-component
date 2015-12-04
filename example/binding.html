@@ -15,8 +15,12 @@
     <script src="../dist/jquery.component.js" charset="utf-8"></script>
     <script>
       var componentName = $.component({
-        template: $('#name-template').html()
+        template: $('#name-template').html(),
+        bindData: function (val) {
+          return val + val;
+        }
       });
+
       $('body').append(componentName.render());
     </script>
   </body>
