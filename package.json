@@ -1,6 +1,6 @@
 {
   "name": "jquery.component",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Create a component with jQuery. Inspired by Backbone View model.",
   "main": "index.js",
   "scripts": {

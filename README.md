@@ -49,6 +49,10 @@ You can also bind your datas by declare a `data-bind-id` attribute with a name a
 </script>
 
 <script>
+  var componentName = $.component({
+    template: $('#name-template').html(),
+  });
+
   $('body').append(componentName.render());
 </script>
 ```
