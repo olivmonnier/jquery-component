@@ -1,5 +1,4 @@
 var template = require('lodash/string/template');
-var _ = require('lodash');
 
 (function($) {
   $.fn.events = function(o){
@@ -47,6 +46,8 @@ var _ = require('lodash');
   };
 
   $.component = function(options) {
+    if(!options) options = {};
+    
     return {
       template: options.template || '',
       events: options.events || {},
@@ -62,5 +63,4 @@ var _ = require('lodash');
       }
     }
   };
-
 }(jQuery));

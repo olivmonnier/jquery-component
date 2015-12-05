@@ -10,7 +10,7 @@ npm install --save jquery.component
 ```
 Include in your .html this library after jQuery file.
 
-## How it work
+## How it works
 jquery.component use template method of lodash so you can integrate a template in your .html. For example :
 ```html
 <script type="text/template" id="title-template">
@@ -48,7 +48,7 @@ You can also bind your datas by declare a `data-bind-id` attribute with a name a
   </div>
 </script>
 
-<script>
+<script type="text/javascript">
   var componentName = $.component({
     template: $('#name-template').html(),
   });

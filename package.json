@@ -6,14 +6,20 @@
   "scripts": {
     "browserify": "browserify src/jquery.component.js > dist/jquery.component.js",
     "uglify": "uglifyjs dist/jquery.component.js -o dist/jquery.component.min.js",
-    "dist": "npm run browserify && npm run uglify"
+    "dist": "npm run browserify && npm run uglify",
+    "pretest-browser": "browserify test/jquery.component.js > test/browser/tests-bundle.js",
+    "posttest-browser": "rm test/browser/tests-bundle.js",
+    "test-browser": "testem"
   },
   "author": "oliv75",
   "license": "MIT",
   "devDependencies": {
     "browserify": "^12.0.1",
+    "chai": "^3.4.1",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
+    "qunitjs": "^1.20.0",
+    "testem": "^0.9.11",
     "uglify-js": "^2.6.1"
   }
 }
