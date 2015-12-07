@@ -1254,19 +1254,57 @@ var template = require('lodash/string/template');
 
   $.component = function(options) {
     if(!options) options = {};
-    
+
     return {
-      template: options.template || '',
-      events: options.events || {},
+      $el: '',
       bindData: options.bindData || null,
+      children: options.children || '',
+      events: options.events || {},
       model: options.model || {},
+      template: options.template || '',
+      setBindData: function(callback) {
+        this.bindData = callback;
+        return this;
+      },
+      setChildren: function(children) {
+        this.children = children;
+
+        if (this.$el) {
+          this.$el.find('[data-children]').html(this.children);
+        }
+        return this;
+      },
+      setEvents: function(events) {
+        this.events = events;
+        // Doesn't work
+        if (this.$el) {
+          this.$el = this.$el.events(this.events).bindData(this.bindData);
+        }
+        return this;
+      },
+      setModel: function(model) {
+        this.model = model;
+        return this;
+      },
+      setTemplate: function(newTemplate) {
+        this.template = newTemplate;
+
+        if (this.$el) {
+          this.$el = this.$el.replaceWith(
+            $(template(this.template)(this.model))
+              .events(this.events).bindData(this.bindData)
+          )
+        }
+        return this;
+      },
       render: function(data) {
         var _this = this;
         if (data) this.model = data;
 
-        var elem = $(template(this.template)(this.model));
+        this.$el = $(template(this.template)(this.model));
+        this.$el.find('[data-children]').html(this.children);
 
-        return elem.events(this.events).bindData(this.bindData);
+        return this.$el.events(this.events).bindData(this.bindData);
       }
     }
   };
