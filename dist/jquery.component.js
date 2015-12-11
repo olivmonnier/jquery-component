@@ -1206,23 +1206,12 @@ module.exports = attempt;
 
 },{"../function/restParam":1,"../lang/isError":24}],34:[function(require,module,exports){
 var template = require('lodash/string/template');
+require('./jquery.events.js');
+require('./jquery.bindData.js');
+require('./jquery.component.js')(template);
 
+},{"./jquery.bindData.js":35,"./jquery.component.js":36,"./jquery.events.js":37,"lodash/string/template":31}],35:[function(require,module,exports){
 (function($) {
-  $.fn.events = function(o){
-    for (var i in o) {
-      var separator = i.split(' ');
-      var result = [];
-
-      if (separator.length > 1) {
-        result = [separator.shift(), separator.join(' ')];
-        this.find(result[1]).bind(i, o[i]);
-      } else {
-        this.bind(i, o[i]);
-      }
-    }
-    return this;
-  };
-
   $.fn.bindData = function(callback) {
     var _this = this;
     $(_this).find('[data-bind-id]').each(function() {
@@ -1251,7 +1240,10 @@ var template = require('lodash/string/template');
     });
     return this;
   };
+}(jQuery));
 
+},{}],36:[function(require,module,exports){
+(function($) {
   $.component = function(options) {
     if(!options) options = {};
 
@@ -1278,12 +1270,20 @@ var template = require('lodash/string/template');
           for(var attr in attrs) {
             this.data[attr] = attrs[attr];
           }
-          
-          var oldEl = obj.$el;
-          oldEl.replaceWith(obj.render());
+
+          obj.$el.replaceWith(obj.render());
         }
       },
-      template: options.template || '',
+      render: function(data) {
+        if (data) this.model.data = data;
+
+        var $el = $(template(this.template)(this.model));
+        $el.find('[data-children]').html(this.children);
+        $el.events(this.events).bindData(this.bindData);
+        this.$el = $el;
+
+        return $el;
+      },
       setBindData: function(callback) {
         this.bindData = callback;
         return this;
@@ -1300,17 +1300,15 @@ var template = require('lodash/string/template');
         this.events = events;
 
         if (this.$el) {
-          var oldEl = this.$el;
-          oldEl.replaceWith(this.render());
+          this.$el.replaceWith(this.render());
         }
         return this;
       },
       setModel: function(model) {
-        this.model = model;
+        this.model.data = model;
 
         if (this.$el) {
-          var oldEl = this.$el;
-          oldEl.replaceWith(this.render());
+          this.$el.replaceWith(this.render());
         }
         return this;
       },
@@ -1318,24 +1316,32 @@ var template = require('lodash/string/template');
         this.template = newTemplate;
 
         if (this.$el) {
-          var oldEl = this.$el;
-          oldEl.replaceWith(this.render());
+          this.$el.replaceWith(this.render());
         }
         return this;
       },
-      render: function(data) {
-        if (data) this.model.data = data;
-
-        var $el = $(template(this.template)(this.model));
-        $el.find('[data-children]').html(this.children);
-        $el.events(this.events).bindData(this.bindData);
-        this.$el = $el;
-
-        return $el;
-      }
+      template: options.template || '',
     }
     return obj;
   };
 }(jQuery));
 
-},{"lodash/string/template":31}]},{},[34]);
+},{}],37:[function(require,module,exports){
+(function($) {
+  $.fn.events = function(o){
+    for (var i in o) {
+      var separator = i.split(' ');
+      var result = [];
+
+      if (separator.length > 1) {
+        result = [separator.shift(), separator.join(' ')];
+        this.find(result[1]).bind(i, o[i]);
+      } else {
+        this.bind(i, o[i]);
+      }
+    }
+    return this;
+  };
+}(jQuery));
+
+},{}]},{},[34]);
