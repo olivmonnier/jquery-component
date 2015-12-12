@@ -6,21 +6,21 @@
       var id = $(this).data('bind-id');
       var eventName = id + ':change';
 
-      $(this).on('change input', function(e) {
+      $(this).on('change input', function() {
         var $input = $(this);
         pubSub.trigger(eventName, [$input.val()]);
       });
 
-      pubSub.on(eventName, function(evt, newVal) {
+      pubSub.on(eventName, function(evt, val) {
         $(_this).find('[data-bind = ' + id + ']').each(function() {
           var $bound = $(this);
 
-          if (callback) newVal = callback(newVal);
+          if (callback) var newVal = callback(val);
 
-          if ( $bound.is("input, textarea, select") ) {
-            $bound.val( newVal );
+          if ($bound.is('input, textarea, select')) {
+            $bound.val(newVal);
           } else {
-            $bound.html( newVal );
+            $bound.html(newVal);
           }
         });
       });

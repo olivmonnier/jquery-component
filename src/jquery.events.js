@@ -1,5 +1,5 @@
 (function($) {
-  $.fn.events = function(o){
+  $.fn.events = function(o) {
     for (var i in o) {
       var separator = i.split(' ');
       var result = [];
