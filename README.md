@@ -9,7 +9,7 @@ Create a component with jQuery. Inspired by Backbone View model.
 ```terminal
 npm install --save jquery.component
 ```
-Include in your .html this library after jQuery file.
+Include in your .html this library after jQuery and lodash files.
 
 ## How it works
 jquery.component use template method of lodash so you can integrate a template in your .html. For example :

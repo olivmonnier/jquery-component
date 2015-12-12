@@ -20,13 +20,26 @@ QUnit.test('$.component API model.data', function(assert) {
 });
 
 QUnit.test('$.component API model.get', function(assert) {
-  var component = $.component();
-  assert.equal(typeof component.model.get, 'function', 'Is function');
+  var component1 = $.component();
+  assert.equal(typeof component1.model.get, 'function', 'Is function');
+  var component2 = $.component({
+    model: {
+      msg: 'Hello World'
+    }
+  });
+  assert.equal(component2.model.get('msg'), 'Hello World', 'Expect return value declared');
 });
 
 QUnit.test('$.component API model.set', function(assert) {
-  var component = $.component();
-  assert.equal(typeof component.model.set, 'function', 'Is function');
+  var component1 = $.component();
+  assert.equal(typeof component1.model.set, 'function', 'Is function');
+  var component2 = $.component({
+    model: {
+      msg: 'Hello World'
+    }
+  });
+  component2.model.set({msg: 'Hello Everyone'});
+  assert.equal(component2.model.data.msg, 'Hello Everyone', 'Expect set value in model.data');
 });
 
 QUnit.test('$.component API render', function(assert) {

@@ -1,15 +1,18 @@
+var jQuery = jQuery || {};
+var _ = _ || {};
+
 (function($) {
   $.component = function(options) {
-    if(!options) options = {};
+    var opts = options || {};
 
     var obj = {
       $el: '',
-      bindData: options.bindData || null,
-      children: options.children || '',
-      events: options.events || {},
+      bindData: opts.bindData || null,
+      children: opts.children || '',
+      events: opts.events || {},
       model: {
-        data: options.model || {},
-        get: function (attr) {
+        data: opts.model || {},
+        get: function(attr) {
           return this.data[attr];
         },
         set: function(key, val) {
@@ -22,17 +25,19 @@
             (attrs = {})[key] = val;
           }
 
-          for(var attr in attrs) {
+          for (var attr in attrs) {
             this.data[attr] = attrs[attr];
           }
 
-          obj.$el.replaceWith(obj.render());
+          if (obj.$el) {
+            obj.$el.replaceWith(obj.render());
+          }
         }
       },
       render: function(data) {
         if (data) this.model.data = data;
 
-        var $el = $(template(this.template)(this.model));
+        var $el = $(_.template(this.template)(this.model));
         $el.find('[data-children]').html(this.children);
         $el.events(this.events).bindData(this.bindData);
         this.$el = $el;
@@ -75,8 +80,8 @@
         }
         return this;
       },
-      template: options.template || '',
-    }
+      template: opts.template || ''
+    };
     return obj;
   };
 }(jQuery));
