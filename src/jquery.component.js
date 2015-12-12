@@ -1,6 +1,3 @@
-var jQuery = jQuery || {};
-var _ = _ || {};
-
 (function($) {
   $.component = function(options) {
     var opts = options || {};

@@ -33,16 +33,16 @@
 },{}],2:[function(require,module,exports){
 (function($) {
   $.component = function(options) {
-    if(!options) options = {};
+    var opts = options || {};
 
     var obj = {
       $el: '',
-      bindData: options.bindData || null,
-      children: options.children || '',
-      events: options.events || {},
+      bindData: opts.bindData || null,
+      children: opts.children || '',
+      events: opts.events || {},
       model: {
-        data: options.model || {},
-        get: function (attr) {
+        data: opts.model || {},
+        get: function(attr) {
           return this.data[attr];
         },
         set: function(key, val) {
@@ -55,11 +55,13 @@
             (attrs = {})[key] = val;
           }
 
-          for(var attr in attrs) {
+          for (var attr in attrs) {
             this.data[attr] = attrs[attr];
           }
 
-          obj.$el.replaceWith(obj.render());
+          if (obj.$el) {
+            obj.$el.replaceWith(obj.render());
+          }
         }
       },
       render: function(data) {
@@ -108,8 +110,8 @@
         }
         return this;
       },
-      template: options.template || '',
-    }
+      template: opts.template || ''
+    };
     return obj;
   };
 }(jQuery));
