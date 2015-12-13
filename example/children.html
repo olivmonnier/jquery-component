@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Children example</title>
+  </head>
+  <body>
+    <script type="text/template" id="parent-template">
+      <div>
+          <h1>Hello World</h1>
+          <div data-children></div>
+      </div>
+    </script>
+
+    <script type="text/template" id="children-template">
+      <h2>Hello Everyone</h2>
+    </script>
+
+    <script src="../node_modules/lodash/index.js" charset="utf-8"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="../dist/jquery.component.js" charset="utf-8"></script>
+    <script>
+      var children = $.component({
+        template: $('#children-template').html()
+      });
+
+      var parent = $.component({
+        template: $('#parent-template').html(),
+        children: children.render()
+      });
+
+      $('body').append(parent.render());
+    </script>
+  </body>
+</html>

@@ -2,7 +2,7 @@
 
 Create a component with jQuery. Inspired by Backbone View model.
 
-![release](https://img.shields.io/badge/release-1.2.2-blue.svg)
+![release](https://img.shields.io/badge/release-1.2.3-blue.svg)
 ![coverage](https://img.shields.io/badge/coverage-63%25-green.svg)
 [![license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -16,6 +16,7 @@ npm install --save jquery.component
 Include in your .html this library after jQuery and lodash files.
 
 ## How it works
+### Basically
 jquery.component use template method of lodash so you can integrate a template in your .html. For example :
 ```html
 <script type="text/template" id="title-template">
@@ -44,6 +45,32 @@ $('body').append(titleComponent.render({
   }
 }));
 ```
+### Children
+If you want include another component or element in your component. You can use `data-children` attribute in the parent container:
+```html
+<script type="text/template" id="parent-template">
+  <div>
+      <h1>Hello World</h1>
+      <div data-children></div>
+  </div>
+</script>
+
+<script type="text/template" id="children-template">
+  <h2>Hello Everyone</h2>
+</script>
+
+<script>
+  var children = $.component({
+    template: $('#children-template').html()
+  });
+
+  var parent = $.component({
+    template: $('#parent-template').html(),
+    children: children.render()
+  });
+</script>
+```
+### Bind datas
 You can also bind your datas by declare a `data-bind-id` attribute with a name and then apply a `data-bind` attribute on another element with the name target. Follow this example:
 ```html
 <script type="text/template" id="name-template">
@@ -70,7 +97,6 @@ var componentName = $.component({
   }
 });
 ```
-
 ## Contributing
 1. Fork it
 2. Create your feature branch (git checkout -b my-new-feature)
