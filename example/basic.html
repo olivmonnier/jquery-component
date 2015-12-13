@@ -16,7 +16,7 @@
     <script src="../node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
     <script src="../dist/jquery.component.js" charset="utf-8"></script>
     <script>
-      window.titleComponent = $.component({
+      var titleComponent = $.component({
         template: $('#title-template').html(),
         events: {
           'click h1': function() {
@@ -28,9 +28,6 @@
       $('body').append(titleComponent.render({
         msg: 'Hello World'
       }));
-
-      console.log(titleComponent);
-
     </script>
   </body>
 </html>
