@@ -40,9 +40,7 @@ var titleComponent = $.component({
 After that you can use your component with some datas using the render method:
 ```javascript
 $('body').append(titleComponent.render({
-  data: {
-    msg: 'Hello World'
-  }
+  msg: 'Hello World'
 }));
 ```
 ### Children
