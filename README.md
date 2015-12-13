@@ -2,8 +2,12 @@
 
 Create a component with jQuery. Inspired by Backbone View model.
 
-![release](https://img.shields.io/badge/release-1.1.0-blue.svg)
+![release](https://img.shields.io/badge/release-1.2.0-blue.svg)
+![coverage](https://img.shields.io/badge/coverage-63%25-green.svg)
 [![license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
+
+## Requirement
+You must include in your html jQuery and lodash.
 
 ## How to install
 ```terminal
