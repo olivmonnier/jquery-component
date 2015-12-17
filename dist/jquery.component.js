@@ -33,12 +33,15 @@
 },{}],2:[function(require,module,exports){
 (function($) {
   $.component = function(options) {
+    var oldData;
     var opts = options || {};
 
     var obj = {
       $el: '',
       bindData: opts.bindData || null,
       children: opts.children || '',
+      componentWillMount: opts.componentWillMount || null,
+      componentWillUpdate: opts.componentWillUpdate || null,
       events: opts.events || {},
       model: {
         data: opts.model || {},
@@ -65,11 +68,20 @@
         }
       },
       render: function(data) {
+        oldData = this.model.data;
         if (data) this.model.data = data;
 
         var $el = $(_.template(this.template)(this.model));
         $el.find('[data-children]').html(this.children);
         $el.events(this.events).bindData(this.bindData);
+
+        if (!this.$el && this.componentWillMount) {
+          this.componentWillMount();
+        }
+        if (this.$el && this.componentWillUpdate) {
+          this.componentWillUpdate(oldData);
+        }
+
         this.$el = $el;
 
         return $el;
