@@ -33,13 +33,16 @@
 },{}],2:[function(require,module,exports){
 (function($) {
   $.component = function(options) {
-    var oldData;
     var opts = options || {};
+    var mounted = false;
+    var oldData;
 
     var obj = {
       $el: '',
       bindData: opts.bindData || null,
       children: opts.children || '',
+      componentDidMount: opts.componentDidMount || null,
+      componentDidUpdate: opts.componentDidUpdate || null,
       componentWillMount: opts.componentWillMount || null,
       componentWillUpdate: opts.componentWillUpdate || null,
       events: opts.events || {},
@@ -68,21 +71,29 @@
         }
       },
       render: function(data) {
-        oldData = this.model.data;
         if (data) this.model.data = data;
+
+        if (!mounted && this.componentWillMount) {
+          this.componentWillMount();
+        }
+        if (mounted && this.componentWillUpdate) {
+          this.componentWillUpdate(oldData);
+        }
 
         var $el = $(_.template(this.template)(this.model));
         $el.find('[data-children]').html(this.children);
         $el.events(this.events).bindData(this.bindData);
 
-        if (!this.$el && this.componentWillMount) {
-          this.componentWillMount();
+        this.$el = $el;
+
+        if (!mounted && this.componentDidMount) {
+          this.componentDidMount();
         }
-        if (this.$el && this.componentWillUpdate) {
-          this.componentWillUpdate(oldData);
+        if (mounted && this.componentDidUpdate) {
+          this.componentDidUpdate(oldData);
         }
 
-        this.$el = $el;
+        mounted = true;
 
         return $el;
       },
