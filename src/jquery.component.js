@@ -19,25 +19,43 @@
           return this.data[attr];
         },
         set: function(key, val) {
+          var attrs;
+          var modelData = Object.create({});
+
           if (key == null) return this;
 
-          var attrs;
           if (typeof key === 'object') {
             attrs = key;
           } else {
             (attrs = {})[key] = val;
           }
 
+          for (var k in this.data) {
+            Object.defineProperty(modelData, k, {
+              value: this.data[k],
+              writable: true,
+              enumerable: true,
+              configurable: true
+            });
+          }
           for (var attr in attrs) {
-            this.data[attr] = attrs[attr];
+            Object.defineProperty(modelData, attr, {
+              value: attrs[attr],
+              writable: true,
+              enumerable: true,
+              configurable: true
+            });
           }
 
           if (obj.$el) {
-            obj.$el.replaceWith(obj.render());
+            obj.$el.replaceWith(obj.render(modelData));
+          } else {
+            this.data = modelData;
           }
         }
       },
       render: function(data) {
+        oldData = this.model.data;
         if (data) this.model.data = data;
 
         if (!mounted && this.componentWillMount) {
@@ -85,11 +103,13 @@
         return this;
       },
       setModel: function(model) {
-        this.model.data = model;
 
         if (this.$el) {
-          this.$el.replaceWith(this.render());
+          this.$el.replaceWith(this.render(model));
+        } else {
+          this.model.data = model;
         }
+
         return this;
       },
       setTemplate: function(newTemplate) {
