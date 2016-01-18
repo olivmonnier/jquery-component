@@ -100,6 +100,7 @@ var componentName = $.component({
 - `componentDidMount` method option run after the render of component.
 - `componentWillUpdate` method option run each time the component re-render before. As argument you can use old datas declared.
 - `componentDidUpdate` method option run each time the component re-render after. As argument you can use old datas declared.
+
 ## Contributing
 1. Fork it
 2. Create your feature branch (git checkout -b my-new-feature)
