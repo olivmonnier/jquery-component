@@ -1,13 +1,13 @@
 {
   "name": "jquery.component",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Create a component with jQuery. Inspired by Backbone View model.",
   "main": "dist/jquery.component.js",
   "scripts": {
     "browserify": "browserify src/plugin.js > dist/jquery.component.js",
     "uglify": "uglifyjs dist/jquery.component.js -o dist/jquery.component.min.js",
     "dist": "npm run browserify && npm run uglify",
-    "pretest-browser": "browserify test/*.js > test/browser/tests-bundle.js",
+    "pretest-browser": "browserify test/jquery.component.js > test/browser/tests-bundle.js",
     "posttest-browser": "rm test/browser/tests-bundle.js",
     "test-browser": "testem"
   },

@@ -1,3 +1,6 @@
+require('./jquery.bindData');
+require('./jquery.events');
+
 QUnit.test('$.component', function(assert) {
   var component = $.component();
   assert.equal(typeof $.component, 'function', 'Is function ?');
@@ -7,6 +10,72 @@ QUnit.test('$.component', function(assert) {
 QUnit.test('$.component API bindData', function(assert) {
   var component = $.component();
   assert.equal(component.bindData, null, 'Is null');
+});
+
+QUnit.test('$.component API componentDidMount', function(assert) {
+  var component1 = $.component();
+  assert.equal(component1.componentDidMount, null, 'Is null');
+  var count = 0;
+  var component2 = $.component({
+    componentDidMount: function() {
+      count++;
+    }
+  });
+  for (var i = 0; i < 2; i++) {
+    component2.render();
+  }
+  assert.equal(count, 1, 'Expect run in first time on render');
+});
+
+QUnit.test('$.component API componentDidUpdate', function(assert) {
+  var component1 = $.component();
+  assert.equal(component1.componentDidUpdate, null, 'Is null');
+  var count = 0;
+  var component2 = $.component({
+    componentDidUpdate: function() {
+      count++;
+    }
+  });
+  for (var i = 0; i < 3; i++) {
+    component2.render();
+    if (i === 0) {
+      assert.equal(count, 0, 'Expect not run in first time on render');
+    }
+  }
+  assert.equal(count, 2, 'Expect run each time render is called');
+});
+
+QUnit.test('$.component API componentWillMount', function(assert) {
+  var component1 = $.component();
+  assert.equal(component1.componentWillMount, null, 'Is null');
+  var count = 0;
+  var component2 = $.component({
+    componentWillMount: function() {
+      count++;
+    }
+  });
+  for (var i = 0; i < 2; i++) {
+    component2.render();
+  }
+  assert.equal(count, 1, 'Expect run in first time on render');
+});
+
+QUnit.test('$.component API componentWillUpdate', function(assert) {
+  var component1 = $.component();
+  assert.equal(component1.componentWillUpdate, null, 'Is null');
+  var count = 0;
+  var component2 = $.component({
+    componentWillUpdate: function() {
+      count++;
+    }
+  });
+  for (var i = 0; i < 3; i++) {
+    component2.render();
+    if (i === 0) {
+      assert.equal(count, 0, 'Expect not run in first time on render');
+    }
+  }
+  assert.equal(count, 2, 'Expect run each time render is called');
 });
 
 QUnit.test('$.component API model', function(assert) {

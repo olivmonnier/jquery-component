@@ -2,8 +2,8 @@
 
 Create a component with jQuery. Inspired by Backbone View model.
 
-![release](https://img.shields.io/badge/release-1.2.3-blue.svg)
-![coverage](https://img.shields.io/badge/coverage-63%25-green.svg)
+![release](https://img.shields.io/badge/release-1.2.4-blue.svg)
+![coverage](https://img.shields.io/badge/coverage-70%25-green.svg)
 [![license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Requirement
@@ -95,6 +95,11 @@ var componentName = $.component({
   }
 });
 ```
+### Lifecycle of component
+- `componentWillMount` method option run before the render of component.
+- `componentDidMount` method option run after the render of component.
+- `componentWillUpdate` method option run each time the component re-render before. As argument you can use old datas declared.
+- `componentDidUpdate` method option run each time the component re-render after. As argument you can use old datas declared.
 ## Contributing
 1. Fork it
 2. Create your feature branch (git checkout -b my-new-feature)
