@@ -1,10 +1,11 @@
 # jQuery.component
 
 Create a component with jQuery. Inspired by Backbone View model.
-
 ![release](https://img.shields.io/badge/release-1.2.5-blue.svg)
 ![coverage](https://img.shields.io/badge/coverage-70%25-green.svg)
 [![license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
+![requirement](https://img.shields.io/badge/required-jquery-lightgrey.svg)
+![requirement](https://img.shields.io/badge/required-lodash-lightgrey.svg)
 
 ## Requirement
 You must include in your html jQuery and lodash.
@@ -21,7 +22,7 @@ jquery.component use template method of lodash so you can integrate a template i
 ```html
 <script type="text/template" id="title-template">
   <div>
-    <h1><%= data.msg %></h1>
+    <h1><%= data.title %></h1>
     <p class="content"></p>
   </div>
 </script>
@@ -40,7 +41,7 @@ var titleComponent = $.component({
 After that you can use your component with some datas using the render method:
 ```javascript
 $('body').append(titleComponent.render({
-  msg: 'Hello World'
+  title: 'Hello World'
 }));
 ```
 ### Children
@@ -74,7 +75,7 @@ You can also bind your datas by declare a `data-bind-id` attribute with a name a
 <script type="text/template" id="name-template">
   <div>
     <h1>My name is <span data-bind="name"></span></h1>
-    <input type data-bind-id="name"/>
+    <input type="text" data-bind-id="name"/>
   </div>
 </script>
 

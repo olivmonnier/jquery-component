@@ -7,7 +7,7 @@
   <body>
     <script type="text/template" id="title-template">
       <div>
-        <h1><%= data.msg %></h1>
+        <h1><%= data.title %></h1>
         <p class="content"></p>
       </div>
     </script>
@@ -26,7 +26,7 @@
       });
 
       $('body').append(titleComponent.render({
-        msg: 'Hello World'
+        title: 'Hello World'
       }));
     </script>
   </body>

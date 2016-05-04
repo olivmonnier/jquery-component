@@ -12,10 +12,10 @@
       });
 
       pubSub.on(eventName, function(evt, val) {
+        if (callback) var newVal = callback(val);
+
         $(_this).find('[data-bind = ' + id + ']').each(function() {
           var $bound = $(this);
-
-          if (callback) var newVal = callback(val);
 
           if ($bound.is('input, textarea, select')) {
             $bound.val(newVal);

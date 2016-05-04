@@ -122,6 +122,7 @@
       },
       template: opts.template || ''
     };
+    
     return obj;
   };
 }(jQuery));
