@@ -5,8 +5,8 @@ Create a component with jQuery. Inspired by Backbone View model.
 ![release](https://img.shields.io/badge/release-1.2.5-blue.svg)
 ![coverage](https://img.shields.io/badge/coverage-70%25-green.svg)
 [![license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
-![requirement](https://img.shields.io/badge/jquery-required-lightgrey.svg)(https://www.npmjs.com/package/jquery)
-![requirement](https://img.shields.io/badge/lodash-required-lightgrey.svg)(https://www.npmjs.com/package/lodash)
+[![requirement](https://img.shields.io/badge/jquery-required-lightgrey.svg)](https://www.npmjs.com/package/jquery)
+[![requirement](https://img.shields.io/badge/lodash-required-lightgrey.svg)](https://www.npmjs.com/package/lodash)
 
 ## Requirement
 You must include in your html jQuery and lodash.
