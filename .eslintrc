@@ -46,7 +46,6 @@
     "no-caller": 2,
     "no-div-regex": 2,
     "no-else-return": 2,
-    "no-empty-label": 2,
     "no-eq-null": 0,
     "no-eval": 1,
     "no-extend-native": 1,
@@ -160,7 +159,7 @@
     ],
     "semi": 2,
     "sort-vars": 0,
-    "space-after-keywords": 1,
+    "keyword-spacing": 1,
     "space-before-blocks": [
       1,
       "always"
@@ -170,7 +169,6 @@
       "never"
     ],
     "space-infix-ops": 1,
-    "space-return-throw-case": 1,
     "space-unary-ops": [
       1,
       {
