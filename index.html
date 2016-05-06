@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jquery-component by olivmonnier</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Jquery-component</h1>
+        <p>Create a component with jQuery. Inspired by Backbone View model.</p>
+
+        <p class="view"><a href="https://github.com/olivmonnier/jquery-component">View the Project on GitHub <small>olivmonnier/jquery-component</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/olivmonnier/jquery-component/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/olivmonnier/jquery-component/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/olivmonnier/jquery-component">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="jquerycomponent" class="anchor" href="#jquerycomponent" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>jQuery.component</h1>
+
+<p>Create a component with jQuery. Inspired by Backbone View model.</p>
+
+<p><img src="https://img.shields.io/badge/release-1.2.5-blue.svg" alt="release">
+<img src="https://img.shields.io/badge/coverage-70%25-green.svg" alt="coverage">
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT%20License-blue.svg" alt="license"></a>
+<a href="https://www.npmjs.com/package/jquery"><img src="https://img.shields.io/badge/jquery-required-lightgrey.svg" alt="requirement"></a>
+<a href="https://www.npmjs.com/package/lodash"><img src="https://img.shields.io/badge/lodash-required-lightgrey.svg" alt="requirement"></a></p>
+
+<h2>
+<a id="requirement" class="anchor" href="#requirement" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirement</h2>
+
+<p>You must include in your html jQuery and lodash.</p>
+
+<h2>
+<a id="how-to-install" class="anchor" href="#how-to-install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to install</h2>
+
+<pre lang="terminal"><code>npm install --save jquery.component
+</code></pre>
+
+<p>Include in your .html this library after jQuery and lodash files.</p>
+
+<h2>
+<a id="how-it-works" class="anchor" href="#how-it-works" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How it works</h2>
+
+<h3>
+<a id="basically" class="anchor" href="#basically" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basically</h3>
+
+<p>jquery.component use template method of lodash so you can integrate a template in your .html. For example :</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/template<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>title-template<span class="pl-pds">"</span></span>&gt;
+  &lt;<span class="pl-ent">div</span>&gt;
+    &lt;<span class="pl-ent">h1</span>&gt;&lt;%= data.title %&gt;&lt;/<span class="pl-ent">h1</span>&gt;
+    &lt;<span class="pl-ent">p</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">p</span>&gt;
+  &lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<p>Then in your js file, call your template and declare events in component method:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> titleComponent <span class="pl-k">=</span> <span class="pl-smi">$</span>.<span class="pl-en">component</span>({
+  template<span class="pl-k">:</span> <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>#title-template<span class="pl-pds">'</span></span>).<span class="pl-en">html</span>(),
+  events<span class="pl-k">:</span> {
+    <span class="pl-s"><span class="pl-pds">'</span><span class="pl-en">click h1</span><span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
+      <span class="pl-en">$</span>(<span class="pl-v">this</span>).<span class="pl-c1">parent</span>().<span class="pl-c1">find</span>(<span class="pl-s"><span class="pl-pds">'</span>p<span class="pl-pds">'</span></span>).<span class="pl-en">append</span>(<span class="pl-s"><span class="pl-pds">'</span>Hello everyone !<span class="pl-pds">'</span></span>);
+    }
+  }
+});</pre></div>
+
+<p>After that you can use your component with some datas using the render method:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>body<span class="pl-pds">'</span></span>).<span class="pl-en">append</span>(<span class="pl-smi">titleComponent</span>.<span class="pl-en">render</span>({
+  title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Hello World<span class="pl-pds">'</span></span>
+}));</pre></div>
+
+<h3>
+<a id="children" class="anchor" href="#children" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Children</h3>
+
+<p>If you want include another component or element in your component. You can use <code>data-children</code> attribute in the parent container:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/template<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>parent-template<span class="pl-pds">"</span></span>&gt;
+  &lt;<span class="pl-ent">div</span>&gt;
+      &lt;<span class="pl-ent">h1</span>&gt;Hello World&lt;/<span class="pl-ent">h1</span>&gt;
+      &lt;<span class="pl-ent">div</span> <span class="pl-e">data-children</span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+  &lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">script</span>&gt;
+
+&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/template<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>children-template<span class="pl-pds">"</span></span>&gt;
+  &lt;<span class="pl-ent">h2</span>&gt;Hello Everyone&lt;/<span class="pl-ent">h2</span>&gt;
+&lt;/<span class="pl-ent">script</span>&gt;
+
+<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">  <span class="pl-k">var</span> children <span class="pl-k">=</span> <span class="pl-smi">$</span>.<span class="pl-en">component</span>({</span>
+<span class="pl-s1">    template<span class="pl-k">:</span> <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>#children-template<span class="pl-pds">'</span></span>).<span class="pl-en">html</span>()</span>
+<span class="pl-s1">  });</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">  <span class="pl-k">var</span> parent <span class="pl-k">=</span> <span class="pl-smi">$</span>.<span class="pl-en">component</span>({</span>
+<span class="pl-s1">    template<span class="pl-k">:</span> <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>#parent-template<span class="pl-pds">'</span></span>).<span class="pl-en">html</span>(),</span>
+<span class="pl-s1">    children<span class="pl-k">:</span> <span class="pl-smi">children</span>.<span class="pl-en">render</span>()</span>
+<span class="pl-s1">  });</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+<h3>
+<a id="bind-datas" class="anchor" href="#bind-datas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bind datas</h3>
+
+<p>You can also bind your datas by declare a <code>data-bind-id</code> attribute with a name and then apply a <code>data-bind</code> attribute on another element with the name target. Follow this example:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/template<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>name-template<span class="pl-pds">"</span></span>&gt;
+  &lt;<span class="pl-ent">div</span>&gt;
+    &lt;<span class="pl-ent">h1</span>&gt;My name is &lt;<span class="pl-ent">span</span> <span class="pl-e">data-bind</span>=<span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">span</span>&gt;&lt;/<span class="pl-ent">h1</span>&gt;
+    &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">data-bind-id</span>=<span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>/&gt;
+  &lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">script</span>&gt;
+
+<span class="pl-s1">&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span>&gt;</span>
+<span class="pl-s1">  <span class="pl-k">var</span> componentName <span class="pl-k">=</span> <span class="pl-smi">$</span>.<span class="pl-en">component</span>({</span>
+<span class="pl-s1">    template<span class="pl-k">:</span> <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>#name-template<span class="pl-pds">'</span></span>).<span class="pl-en">html</span>(),</span>
+<span class="pl-s1">  });</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">  <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>body<span class="pl-pds">'</span></span>).<span class="pl-en">append</span>(<span class="pl-smi">componentName</span>.<span class="pl-en">render</span>());</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+<p>It's possible to pass a callback method in $.component:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> componentName <span class="pl-k">=</span> <span class="pl-smi">$</span>.<span class="pl-en">component</span>({
+  template<span class="pl-k">:</span> <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>#name-template<span class="pl-pds">'</span></span>).<span class="pl-en">html</span>(),
+  <span class="pl-en">bindData</span><span class="pl-k">:</span> <span class="pl-k">function</span> (<span class="pl-smi">val</span>) {
+    <span class="pl-k">return</span> val <span class="pl-k">+</span> val;
+  }
+});</pre></div>
+
+<h3>
+<a id="lifecycle-of-component" class="anchor" href="#lifecycle-of-component" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lifecycle of component</h3>
+
+<ul>
+<li>
+<code>componentWillMount</code> method option run before the render of component.</li>
+<li>
+<code>componentDidMount</code> method option run after the render of component.</li>
+<li>
+<code>componentWillUpdate</code> method option run each time the component re-render before. As argument you can use old datas declared.</li>
+<li>
+<code>componentDidUpdate</code> method option run each time the component re-render after. As argument you can use old datas declared.</li>
+</ul>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (git checkout -b my-new-feature)</li>
+<li>Commit your changes (git commit -am 'Added some feature')</li>
+<li>Push to the branch (git push origin my-new-feature)</li>
+<li>Create new Pull Request</li>
+</ol>
+
+<h2>
+<a id="licence" class="anchor" href="#licence" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Licence</h2>
+
+<pre><code>MIT
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/olivmonnier">olivmonnier</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
