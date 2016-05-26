@@ -19,7 +19,7 @@ Include in your .html this library after jQuery and lodash files.
 
 ## How it works
 ### Basically
-jquery.component use template method of lodash so you can integrate a template in your .html. For example :
+jquery.component uses template method of lodash so you can integrate a template in your .html. For example:
 ```html
 <script type="text/template" id="title-template">
   <div>
@@ -39,14 +39,14 @@ var titleComponent = $.component({
   }
 });
 ```
-After that you can use your component with some datas using the render method:
+After you can use your component with some data by using the render method:
 ```javascript
 $('body').append(titleComponent.render({
   title: 'Hello World'
 }));
 ```
 ### Children
-If you want include another component or element in your component. You can use `data-children` attribute in the parent container:
+If you want to include another component or element in your component. You can use `data-children` attribute in the parent container:
 ```html
 <script type="text/template" id="parent-template">
   <div>
@@ -70,8 +70,8 @@ If you want include another component or element in your component. You can use 
   });
 </script>
 ```
-### Bind datas
-You can also bind your datas by declare a `data-bind-id` attribute with a name and then apply a `data-bind` attribute on another element with the name target. Follow this example:
+### Bind data
+You can also bind your data by declaring a `data-bind-id` attribute with a name and then apply a `data-bind` attribute to another element with the name target. Follow this example:
 ```html
 <script type="text/template" id="name-template">
   <div>
@@ -98,10 +98,10 @@ var componentName = $.component({
 });
 ```
 ### Lifecycle of component
-- `componentWillMount` method option run before the render of component.
-- `componentDidMount` method option run after the render of component.
-- `componentWillUpdate` method option run each time the component re-render before. As argument you can use old datas declared.
-- `componentDidUpdate` method option run each time the component re-render after. As argument you can use old datas declared.
+- `componentWillMount` method option will run before the render of component.
+- `componentDidMount` method option will run after the render of component.
+- `componentWillUpdate` each time, method option will run before the component re-renders. As argument, you can use old declared data.
+- `componentDidUpdate` each time, method option will run after the component re-renders. As argument, you can use old declared data.
 
 ## Contributing
 1. Fork it
