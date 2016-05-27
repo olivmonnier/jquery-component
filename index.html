@@ -13,15 +13,6 @@
     <![endif]-->
   </head>
   <body>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-77397339-1', 'auto');
-      ga('send', 'pageview');
-    </script>
     <div class="wrapper">
       <header>
         <h1>Jquery-component</h1>
@@ -42,7 +33,7 @@
 
 <p>Create a component with jQuery. Inspired by Backbone View model.</p>
 
-<p><img src="https://img.shields.io/badge/release-1.2.5-blue.svg" alt="release">
+<p><img src="https://img.shields.io/badge/release-1.2.6-blue.svg" alt="release">
 <img src="https://img.shields.io/badge/coverage-70%25-green.svg" alt="coverage">
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT%20License-blue.svg" alt="license"></a>
 <a href="https://www.npmjs.com/package/jquery"><img src="https://img.shields.io/badge/jquery-required-lightgrey.svg" alt="requirement"></a>
@@ -67,7 +58,7 @@
 <h3>
 <a id="basically" class="anchor" href="#basically" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basically</h3>
 
-<p>jquery.component use template method of lodash so you can integrate a template in your .html. For example :</p>
+<p>jquery.component uses template method of lodash so you can integrate a template in your .html. For example:</p>
 
 <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/template<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>title-template<span class="pl-pds">"</span></span>&gt;
   &lt;<span class="pl-ent">div</span>&gt;
@@ -87,7 +78,7 @@
   }
 });</pre></div>
 
-<p>After that you can use your component with some datas using the render method:</p>
+<p>After you can use your component with some data by using the render method:</p>
 
 <div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>body<span class="pl-pds">'</span></span>).<span class="pl-en">append</span>(<span class="pl-smi">titleComponent</span>.<span class="pl-en">render</span>({
   title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Hello World<span class="pl-pds">'</span></span>
@@ -96,7 +87,7 @@
 <h3>
 <a id="children" class="anchor" href="#children" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Children</h3>
 
-<p>If you want include another component or element in your component. You can use <code>data-children</code> attribute in the parent container:</p>
+<p>If you want to include another component or element in your component. You can use <code>data-children</code> attribute in the parent container:</p>
 
 <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/template<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>parent-template<span class="pl-pds">"</span></span>&gt;
   &lt;<span class="pl-ent">div</span>&gt;
@@ -121,9 +112,9 @@
 <span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
 
 <h3>
-<a id="bind-datas" class="anchor" href="#bind-datas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bind datas</h3>
+<a id="bind-data" class="anchor" href="#bind-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bind data</h3>
 
-<p>You can also bind your datas by declare a <code>data-bind-id</code> attribute with a name and then apply a <code>data-bind</code> attribute on another element with the name target. Follow this example:</p>
+<p>You can also bind your data by declaring a <code>data-bind-id</code> attribute with a name and then apply a <code>data-bind</code> attribute to another element with the name target. Follow this example:</p>
 
 <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/template<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>name-template<span class="pl-pds">"</span></span>&gt;
   &lt;<span class="pl-ent">div</span>&gt;
@@ -154,13 +145,13 @@
 
 <ul>
 <li>
-<code>componentWillMount</code> method option run before the render of component.</li>
+<code>componentWillMount</code> method option will run before the render of component.</li>
 <li>
-<code>componentDidMount</code> method option run after the render of component.</li>
+<code>componentDidMount</code> method option will run after the render of component.</li>
 <li>
-<code>componentWillUpdate</code> method option run each time the component re-render before. As argument you can use old datas declared.</li>
+<code>componentWillUpdate</code> each time, method option will run before the component re-renders. As argument, you can use old declared data.</li>
 <li>
-<code>componentDidUpdate</code> method option run each time the component re-render after. As argument you can use old datas declared.</li>
+<code>componentDidUpdate</code> each time, method option will run after the component re-renders. As argument, you can use old declared data.</li>
 </ul>
 
 <h2>
