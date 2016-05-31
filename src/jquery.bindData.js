@@ -1,7 +1,7 @@
 (function($) {
   $.fn.bindData = function(callback) {
-    var _this = this;
-    $(_this).find('[data-bind-id]').each(function() {
+    var self = this;
+    $(self).find('[data-bind-id]').each(function() {
       var pubSub = $({});
       var id = $(this).data('bind-id');
       var eventName = id + ':change';
@@ -14,7 +14,7 @@
       pubSub.on(eventName, function(evt, val) {
         if (callback) var newVal = callback(val);
 
-        $(_this).find('[data-bind = ' + id + ']').each(function() {
+        $(self).find('[data-bind = ' + id + ']').each(function() {
           var $bound = $(this);
 
           if ($bound.is('input, textarea, select')) {
