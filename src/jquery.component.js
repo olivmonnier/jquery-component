@@ -4,16 +4,12 @@
     var mounted = false;
     var oldData;
 
-    var obj = {
-      $el: '',
-      bindData: opts.bindData || null,
-      children: opts.children || '',
-      componentDidMount: opts.componentDidMount || null,
-      componentDidUpdate: opts.componentDidUpdate || null,
-      componentWillMount: opts.componentWillMount || null,
-      componentWillUpdate: opts.componentWillUpdate || null,
-      events: opts.events || {},
-      model: {
+    var Component = function() {
+      var self = this;
+      this.$el = '';
+      this.children = opts.children || '';
+      this.events = opts.events || {};
+      this.model = {
         data: opts.model || {},
         get: function(attr) {
           return this.data[attr];
@@ -47,81 +43,103 @@
             });
           }
 
-          if (obj.$el) {
-            obj.$el.replaceWith(obj.render(modelData));
+          if (self.$el) {
+            self.$el.replaceWith(self.render(modelData));
           } else {
             this.data = modelData;
           }
         }
-      },
-      render: function(data) {
-        oldData = this.model.data;
-        if (data) this.model.data = data;
+      };
+      this.template = opts.template || '';
+    };
 
-        if (!mounted && this.componentWillMount) {
-          this.componentWillMount();
-        }
-        if (mounted && this.componentWillUpdate) {
-          this.componentWillUpdate(oldData);
-        }
+    Component.prototype.bindData = opts.bindData || null;
 
+    Component.prototype.componentDidMount = opts.componentDidMount || null;
+
+    Component.prototype.componentDidUpdate = opts.componentDidUpdate || null;
+
+    Component.prototype.componentWillMount = opts.componentWillMount || null;
+
+    Component.prototype.componentWillUpdate = opts.componentWillUpdate || null;
+
+    Component.prototype.render = function(data) {
+      oldData = this.model.data;
+      if (data) this.model.data = data;
+
+      if (!mounted && this.componentWillMount) {
+        this.componentWillMount();
+      }
+      if (mounted && this.componentWillUpdate) {
+        this.componentWillUpdate(oldData);
+      }
+
+      if (!mounted || data) {
         var $el = $(_.template(this.template)(this.model));
         $el.find('[data-children]').html(this.children);
         $el.events(this.events).bindData(this.bindData);
-
         this.$el = $el;
+      }
 
-        if (!mounted && this.componentDidMount) {
-          this.componentDidMount();
-        }
-        if (mounted && this.componentDidUpdate) {
-          this.componentDidUpdate(oldData);
-        }
+      if (!mounted && this.componentDidMount) {
+        this.componentDidMount();
+      }
+      if (mounted && this.componentDidUpdate) {
+        this.componentDidUpdate(oldData);
+      }
 
-        mounted = true;
+      mounted = true;
 
-        return $el;
-      },
-      setBindData: function(callback) {
-        this.bindData = callback;
-        return this;
-      },
-      setChildren: function(children) {
-        this.children = children;
-
-        if (this.$el) {
-          this.$el.find('[data-children]').html(this.children);
-        }
-        return this;
-      },
-      setEvents: function(events) {
-        this.events = events;
-
-        if (this.$el) {
-          this.$el.replaceWith(this.render());
-        }
-        return this;
-      },
-      setModel: function(model) {
-
-        if (this.$el) {
-          this.$el.replaceWith(this.render(model));
-        } else {
-          this.model.data = model;
-        }
-
-        return this;
-      },
-      setTemplate: function(newTemplate) {
-        this.template = newTemplate;
-
-        if (this.$el) {
-          this.$el.replaceWith(this.render());
-        }
-        return this;
-      },
-      template: opts.template || ''
+      return this.$el;
     };
-    return obj;
+
+    Component.prototype.setBindData = function(callback) {
+      this.bindData = callback;
+
+      return this;
+    };
+
+    Component.prototype.setChildren = function(children) {
+      this.children = children;
+
+      if (this.$el) {
+        this.$el.find('[data-children]').html(this.children);
+      }
+
+      return this;
+    };
+
+    Component.prototype.setEvents = function(events) {
+      this.events = events;
+
+      if (this.$el) {
+        this.$el.replaceWith(this.render());
+      }
+
+      return this;
+    };
+
+    Component.prototype.setModel = function(model) {
+
+      if (this.$el) {
+        this.$el.replaceWith(this.render(model));
+      } else {
+        this.model.data = model;
+      }
+
+      return this;
+    };
+
+    Component.prototype.setTemplate = function(newTemplate) {
+      this.template = newTemplate;
+
+      if (this.$el) {
+        this.$el.replaceWith(this.render());
+      }
+
+      return this;
+    };
+
+    return new Component();
   };
 }(jQuery));
