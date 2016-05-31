@@ -2,7 +2,7 @@
 
 Create a component with jQuery. Inspired by Backbone View model.
 
-![release](https://img.shields.io/badge/release-1.3.0-blue.svg)
+![release](https://img.shields.io/badge/release-1.3.1-blue.svg)
 ![coverage](https://img.shields.io/badge/coverage-75%25-green.svg)
 [![license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
 [![requirement](https://img.shields.io/badge/jquery-required-lightgrey.svg)](https://www.npmjs.com/package/jquery)
