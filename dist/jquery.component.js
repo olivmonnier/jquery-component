@@ -88,6 +88,7 @@ require('./jquery.component.js');
           }
         }
       };
+      this.optionsTemplate = opts.optionsTemplate || {};
       this.template = opts.template || '';
     };
 
@@ -101,9 +102,10 @@ require('./jquery.component.js');
 
     Component.prototype.componentWillUpdate = opts.componentWillUpdate || null;
 
-    Component.prototype.render = function(data) {
+    Component.prototype.render = function(data, optionsTemplate) {
       oldData = this.model.data;
       if (data) this.model.data = data;
+      if (optionsTemplate) this.optionsTemplate = optionsTemplate;
 
       if (!mounted && this.componentWillMount) {
         this.componentWillMount();
@@ -113,7 +115,7 @@ require('./jquery.component.js');
       }
 
       if (!mounted || data) {
-        var $el = $(_.template(this.template)(this.model));
+        var $el = $(_.template(this.template, this.optionsTemplate)(this.model));
         $el.find('[data-children]').html(this.children);
         $el.events(this.events).bindData(this.bindData);
         this.$el = $el;
