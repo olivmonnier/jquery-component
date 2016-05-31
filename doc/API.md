@@ -24,5 +24,5 @@ Set or replace object data used in your component.
 ### `setTemplate(newTemplate)`
 Set or replace the template html of component.
 
-### `render(datas)`
-Render the component with the template attribute declared and datas passed in argument (optional).
+### `render(datas, optionsTemplate)`
+Render the component with the template attribute declared and datas passed in argument (optional). In second argument you can pass all options lodash template.
