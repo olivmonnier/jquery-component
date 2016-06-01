@@ -5,31 +5,43 @@
     <title>Children example</title>
   </head>
   <body>
-    <script type="text/template" id="parent-template">
+    <script type="text/template" id="title-primary-template">
       <div>
-          <h1>Hello World</h1>
-          <div data-children></div>
+        <h1>Hello World</h1>
+        <div data-child="titleSecondary"></div>
+        <div data-child="paragraph"></div>
       </div>
     </script>
 
-    <script type="text/template" id="children-template">
+    <script type="text/template" id="title-secondary-template">
       <h2>Hello Everyone</h2>
+    </script>
+
+    <script type="text/template" id="paragraph-template">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     </script>
 
     <script src="../node_modules/lodash/index.js" charset="utf-8"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
     <script src="../dist/jquery.component.js" charset="utf-8"></script>
     <script>
-      var children = $.component({
-        template: $('#children-template').html()
+      var titleSecondary = $.component({
+        template: $('#title-secondary-template').html()
       });
 
-      var parent = $.component({
-        template: $('#parent-template').html(),
-        children: children.render()
+      var paragraph = $.component({
+        template: $('#paragraph-template').html()
       });
 
-      $('body').append(parent.render());
+      var titlePrimary = $.component({
+        template: $('#title-primary-template').html(),
+        children: {
+          'titleSecondary': titleSecondary.render(),
+          'paragraph': paragraph.render()
+        }
+      });
+
+      $('body').append(titlePrimary.render());
     </script>
   </body>
 </html>

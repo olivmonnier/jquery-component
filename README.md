@@ -3,7 +3,7 @@
 Create a component with jQuery. Inspired by Backbone View model.
 
 ![release](https://img.shields.io/badge/release-1.3.1-blue.svg)
-![coverage](https://img.shields.io/badge/coverage-75%25-green.svg)
+![coverage](https://img.shields.io/badge/coverage-70%25-green.svg)
 [![license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
 [![requirement](https://img.shields.io/badge/jquery-required-lightgrey.svg)](https://www.npmjs.com/package/jquery)
 [![requirement](https://img.shields.io/badge/lodash-required-lightgrey.svg)](https://www.npmjs.com/package/lodash)
@@ -71,6 +71,45 @@ If you want to include another component or element in your component. You can u
 </script>
 ```
 `children` attribute accept an array of components or elements.
+
+By the way, if you declare an object into children attribute, use `data-child` with the key name:
+```html
+<script type="text/template" id="title-primary-template">
+  <div>
+    <h1>Hello World</h1>
+    <div data-child="titleSecondary"></div>
+    <div data-child="paragraph"></div>
+  </div>
+</script>
+
+<script type="text/template" id="title-secondary-template">
+  <h2>Hello Everyone</h2>
+</script>
+
+<script type="text/template" id="paragraph-template">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</script>
+
+<script>
+  var titleSecondary = $.component({
+    template: $('#title-secondary-template').html()
+  });
+
+  var paragraph = $.component({
+    template: $('#paragraph-template').html()
+  });
+
+  var titlePrimary = $.component({
+    template: $('#title-primary-template').html(),
+    children: {
+      'titleSecondary': titleSecondary.render(),
+      'paragraph': paragraph.render()
+    }
+  });
+
+  $('body').append(titlePrimary.render());
+</script>
+```
 ### Bind data
 You can also bind your data by declaring a `data-bind-id` attribute with a name and then apply a `data-bind` attribute to another element with the name target. Follow this example:
 ```html
