@@ -116,7 +116,12 @@ require('./jquery.component.js');
 
       if (!mounted || data) {
         var $el = $(_.template(this.template, this.optionsTemplate)(this.model));
-        $el.find('[data-children]').html(this.children);
+
+        if (!Array.isArray(this.children)) this.children = [this.children];
+
+        this.children.forEach(function(child) {
+          $el.find('[data-children]').append(child);
+        });
         $el.events(this.events).bindData(this.bindData);
         this.$el = $el;
       }

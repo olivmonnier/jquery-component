@@ -70,6 +70,7 @@ If you want to include another component or element in your component. You can u
   });
 </script>
 ```
+`children` attribute accept an array of components or elements.
 ### Bind data
 You can also bind your data by declaring a `data-bind-id` attribute with a name and then apply a `data-bind` attribute to another element with the name target. Follow this example:
 ```html
