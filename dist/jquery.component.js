@@ -148,7 +148,13 @@ require('./jquery.component.js');
       this.children = children;
 
       if (this.$el) {
-        this.$el.find('[data-children]').html(this.children);
+        if (!Array.isArray(this.children)) this.children = [this.children];
+
+        this.$el.find('[data-children]').empty();
+
+        this.children.forEach(function(child) {
+          this.$el.find('[data-children]').append(child);
+        });
       }
 
       return this;
