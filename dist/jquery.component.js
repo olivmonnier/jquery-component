@@ -114,17 +114,21 @@ require('./jquery.component.js');
         this.componentWillUpdate(oldData);
       }
 
-      if (!mounted || data) {
-        var $el = $(_.template(this.template, this.optionsTemplate)(this.model));
+      var $el = $(_.template(this.template, this.optionsTemplate)(this.model));
 
+      if (this.children instanceof Object) {
+        for (var child in this.children) {
+          $el.find('[data-child="' + child + '"]').html(this.children[child]);
+        }
+      } else {
         if (!Array.isArray(this.children)) this.children = [this.children];
 
         this.children.forEach(function(child) {
           $el.find('[data-children]').append(child);
         });
-        $el.events(this.events).bindData(this.bindData);
-        this.$el = $el;
       }
+      $el.events(this.events).bindData(this.bindData);
+      this.$el = $el;
 
       if (!mounted && this.componentDidMount) {
         this.componentDidMount();
@@ -148,13 +152,19 @@ require('./jquery.component.js');
       this.children = children;
 
       if (this.$el) {
-        if (!Array.isArray(this.children)) this.children = [this.children];
-
         this.$el.find('[data-children]').empty();
 
-        this.children.forEach(function(child) {
-          this.$el.find('[data-children]').append(child);
-        });
+        if (this.children instanceof Object) {
+          for (var child in this.children) {
+            $el.find('[data-child="' + child + '"]').html(this.children[child]);
+          }
+        } else {
+          if (!Array.isArray(this.children)) this.children = [this.children];
+
+          this.children.forEach(function(child) {
+            $el.find('[data-children]').append(child);
+          });
+        }
       }
 
       return this;
