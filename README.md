@@ -70,7 +70,7 @@ If you want to include another component or element in your component. You can u
   });
 </script>
 ```
-`children` attribute accept an array of components or elements.
+`children` attribute accept an array of components or elements. If you pass a function, it will be evaluate with the model.
 
 By the way, if you declare an object into children attribute, use `data-child` with the key name:
 ```html

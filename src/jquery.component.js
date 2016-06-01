@@ -78,7 +78,9 @@
 
       var $el = $(_.template(this.template, this.optionsTemplate)(this.model));
 
-      if (this.children instanceof Object) {
+      if (typeof this.children == 'function') this.children = this.children();
+
+      if (this.children instanceof Object, !Array.isArray(this.children)) {
         for (var child in this.children) {
           $el.find('[data-child="' + child + '"]').html(this.children[child]);
         }
@@ -116,7 +118,9 @@
       if (this.$el) {
         this.$el.find('[data-children]').empty();
 
-        if (this.children instanceof Object) {
+        if (typeof this.children == 'function') this.children = this.children();
+
+        if (this.children instanceof Object, !Array.isArray(this.children)) {
           for (var child in this.children) {
             $el.find('[data-child="' + child + '"]').html(this.children[child]);
           }
