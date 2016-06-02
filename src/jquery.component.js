@@ -56,6 +56,10 @@
 
     Component.prototype.bindData = opts.bindData || null;
 
+    Component.prototype.clone = function() {
+      return $.extend(true, {}, this);
+    }
+
     Component.prototype.componentDidMount = opts.componentDidMount || null;
 
     Component.prototype.componentDidUpdate = opts.componentDidUpdate || null;
