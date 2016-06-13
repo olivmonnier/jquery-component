@@ -1,4 +1,7 @@
 ## API instance
+### `clone`
+clone component instance. Useful for set new data.
+
 ### `model.data`
 Object where all associate datas of component are stored.
 
