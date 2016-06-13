@@ -39,15 +39,15 @@ require('./jquery.component.js');
 (function($) {
   $.component = function(options) {
     var opts = options || {};
-    var mounted = false;
-    var oldData;
 
     var Component = function() {
       var self = this;
       this.$el = '';
+      this.mounted = false;
       this.children = opts.children || '';
       this.events = opts.events || {};
       this.model = {
+        oldData: null,
         data: opts.model || {},
         get: function(attr) {
           return this.data[attr];
@@ -94,6 +94,10 @@ require('./jquery.component.js');
 
     Component.prototype.bindData = opts.bindData || null;
 
+    Component.prototype.clone = function() {
+      return $.extend(true, {}, this);
+    }
+
     Component.prototype.componentDidMount = opts.componentDidMount || null;
 
     Component.prototype.componentDidUpdate = opts.componentDidUpdate || null;
@@ -103,15 +107,15 @@ require('./jquery.component.js');
     Component.prototype.componentWillUpdate = opts.componentWillUpdate || null;
 
     Component.prototype.render = function(data, optionsTemplate) {
-      oldData = this.model.data;
+      this.model.oldData = this.model.data;
       if (data) this.model.data = data;
       if (optionsTemplate) this.optionsTemplate = optionsTemplate;
 
-      if (!mounted && this.componentWillMount) {
+      if (!this.mounted && this.componentWillMount) {
         this.componentWillMount();
       }
-      if (mounted && this.componentWillUpdate) {
-        this.componentWillUpdate(oldData);
+      if (this.mounted && this.componentWillUpdate) {
+        this.componentWillUpdate(this.model.oldData);
       }
 
       var $el = $(_.template(this.template, this.optionsTemplate)(this.model));
@@ -132,14 +136,14 @@ require('./jquery.component.js');
       $el.events(this.events).bindData(this.bindData);
       this.$el = $el;
 
-      if (!mounted && this.componentDidMount) {
+      if (!this.mounted && this.componentDidMount) {
         this.componentDidMount();
       }
-      if (mounted && this.componentDidUpdate) {
-        this.componentDidUpdate(oldData);
+      if (this.mounted && this.componentDidUpdate) {
+        this.componentDidUpdate(this.model.oldData);
       }
 
-      mounted = true;
+      this.mounted = true;
 
       return this.$el;
     };
