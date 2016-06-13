@@ -13,16 +13,6 @@
     <![endif]-->
   </head>
   <body>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-77397339-1', 'auto');
-      ga('send', 'pageview');
-
-    </script>
     <div class="wrapper">
       <header>
         <h1>Jquery-component</h1>
@@ -43,7 +33,7 @@
 
 <p>Create a component with jQuery. Inspired by Backbone View model.</p>
 
-<p><img src="https://img.shields.io/badge/release-1.3.2-blue.svg" alt="release">
+<p><img src="https://img.shields.io/badge/release-1.3.5-blue.svg" alt="release">
 <img src="https://img.shields.io/badge/coverage-70%25-green.svg" alt="coverage">
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT%20License-blue.svg" alt="license"></a>
 <a href="https://www.npmjs.com/package/jquery"><img src="https://img.shields.io/badge/jquery-required-lightgrey.svg" alt="requirement"></a>
@@ -121,7 +111,7 @@
 <span class="pl-s1">  });</span>
 <span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
 
-<p><code>children</code> attribute accept an array of components or elements.</p>
+<p><code>children</code> attribute accept an array of components or elements. If you pass a function, it will be evaluate with the model.</p>
 
 <p>By the way, if you declare an object into children attribute, use <code>data-child</code> with the key name:</p>
 
@@ -227,6 +217,6 @@
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-
+    
   </body>
 </html>
