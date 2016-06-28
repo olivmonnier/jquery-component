@@ -43,10 +43,10 @@
             });
           }
 
+          this.data = modelData;
+
           if (self.$el) {
-            self.$el.replaceWith(self.render(modelData));
-          } else {
-            this.data = modelData;
+            self.$el.trigger('change', [key, val]);
           }
         }
       };
@@ -69,6 +69,7 @@
     Component.prototype.componentWillUpdate = opts.componentWillUpdate || null;
 
     Component.prototype.render = function(data, optionsTemplate) {
+      var self = this;
       this.model.oldData = this.model.data;
       if (data) this.model.data = data;
       if (optionsTemplate) this.optionsTemplate = optionsTemplate;
@@ -95,8 +96,31 @@
           $el.find('[data-children]').append(child);
         });
       }
+      for (var attr in this.model.data) {
+        var $elems = $el.find('[data-model="' + attr + '"]');
+
+        $elems.each(function($elem) {
+          if ($(this)[0].tagName == 'INPUT' || $(this)[0].tagName == 'SELECT' || $(this)[0].tagName == 'TEXTAREA') {
+            $(this).val(self.model.data[attr]);
+          } else {
+            $(this).text(self.model.data[attr]);
+          }
+        });
+      }
       $el.events(this.events).bindData(this.bindData);
       this.$el = $el;
+
+      this.$el.on('change', function (e, key, value) {
+        var $elems = self.$el.find('[data-model="' + key + '"]');
+
+        $elems.each(function($elem) {
+          if ($(this)[0].tagName == 'INPUT' || $(this)[0].tagName == 'SELECT' || $(this)[0].tagName == 'TEXTAREA') {
+            $(this).val(value);
+          } else {
+            $(this).text(value);
+          }
+        });
+      });
 
       if (!this.mounted && this.componentDidMount) {
         this.componentDidMount();

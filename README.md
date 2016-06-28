@@ -23,7 +23,7 @@ jquery.component uses template method of lodash so you can integrate a template 
 ```html
 <script type="text/template" id="title-template">
   <div>
-    <h1><%= data.title %></h1>
+    <h1 data-model="title"></h1>
     <p class="content"></p>
   </div>
 </script>

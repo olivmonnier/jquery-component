@@ -10,7 +10,7 @@ Take as argument an attribute key of object `model.data` and return this value.
 
 ### `model.set(key, value)`
 Pass in first argument the key name to declare or overwrite in `model.data` and then pass in second argument this value.
-You can also pass in argument an object.
+You can also pass in argument an object. An event `change` triggered and updated value in element DOM.
 
 ### `setBindData(callback)`
 Set or replace the callback method called after a change on input, selector or textarea tag.
