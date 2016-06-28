@@ -1,4 +1,16 @@
 (function($) {
+  function applyModelView($el, attr, value) {
+    var $elems = $el.find('[data-model="' + attr + '"]');
+
+    $elems.each(function($elem) {
+      if ($(this)[0].tagName == 'INPUT' || $(this)[0].tagName == 'SELECT' || $(this)[0].tagName == 'TEXTAREA') {
+        $(this).val(value);
+      } else {
+        $(this).text(value);
+      }
+    });
+  }
+
   $.component = function(options) {
     var opts = options || {};
 
@@ -97,29 +109,13 @@
         });
       }
       for (var attr in this.model.data) {
-        var $elems = $el.find('[data-model="' + attr + '"]');
-
-        $elems.each(function($elem) {
-          if ($(this)[0].tagName == 'INPUT' || $(this)[0].tagName == 'SELECT' || $(this)[0].tagName == 'TEXTAREA') {
-            $(this).val(self.model.data[attr]);
-          } else {
-            $(this).text(self.model.data[attr]);
-          }
-        });
+        applyModelView($el, attr, self.model.data[attr]);
       }
       $el.events(this.events).bindData(this.bindData);
       this.$el = $el;
 
       this.$el.on('change', function (e, key, value) {
-        var $elems = self.$el.find('[data-model="' + key + '"]');
-
-        $elems.each(function($elem) {
-          if ($(this)[0].tagName == 'INPUT' || $(this)[0].tagName == 'SELECT' || $(this)[0].tagName == 'TEXTAREA') {
-            $(this).val(value);
-          } else {
-            $(this).text(value);
-          }
-        });
+        applyModelView(self.$el, key, value);
       });
 
       if (!this.mounted && this.componentDidMount) {
